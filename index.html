@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros 4 Meses ❤️</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 10;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 2s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 2s ease-out 0.5s both;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        /* Floating Hearts */
+        .floating-heart {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        .floating-heart:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-heart:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-heart:nth-child(3) {
+            top: 40%;
+            left: 80%;
+            animation-delay: 4s;
+        }
+
+        /* Month Sections */
+        .month-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 4rem 2rem;
+        }
+
+        .month-section:nth-child(odd) {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+
+        .month-section:nth-child(even) {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .month-content {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .month-text {
+            padding: 2rem;
+        }
+
+        .month-text h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .month-text h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+            border-radius: 2px;
+        }
+
+        .month-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #34495e;
+            margin-bottom: 2rem;
+        }
+
+        .month-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .month-image:hover {
+            transform: scale(1.02);
+        }
+
+        .month-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .month-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Final Section */
+        .final-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-content {
+            z-index: 10;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .final-content h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .final-content p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .love-button {
+            background: linear-gradient(45deg, #ff6b9d, #ff8e83);
+            border: none;
+            color: white;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .love-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Particles */
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: particle 15s linear infinite;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes particle {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero {
+                background-attachment: scroll;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .month-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .month-text {
+                padding: 1rem;
+            }
+
+            .month-text h2 {
+                font-size: 2.5rem;
+            }
+
+            .month-text p {
+                font-size: 1.1rem;
+            }
+
+            .month-image img {
+                height: 300px;
+            }
+
+            .final-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .final-content p {
+                font-size: 1.1rem;
+            }
+
+            .floating-heart {
+                display: none;
+            }
+
+            .month-section {
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .month-text h2 {
+                font-size: 2rem;
+            }
+
+            .month-text p {
+                font-size: 1rem;
+            }
+
+            .month-image img {
+                height: 250px;
+            }
+
+            .final-content h2 {
+                font-size: 2rem;
+            }
+
+            .final-content p {
+                font-size: 1rem;
+            }
+
+            .love-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Heart decoration */
+        .heart-decoration {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(255, 107, 157, 0.6);
+            animation: heartBeat 2s ease-in-out infinite;
+        }
+
+        .heart-decoration:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .heart-decoration:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; }
+        .heart-decoration:nth-child(3) { bottom: 20%; left: 8%; animation-delay: 2s; }
+        .heart-decoration:nth-child(4) { bottom: 15%; right: 5%; animation-delay: 3s; }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Success message */
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(45deg, #ff6b9d, #ff8e83);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 1001;
+            opacity: 0;
+            transition: all 0.5s ease;
+            max-width: 90%;
+        }
+
+        .success-message.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-heart"><i class="fas fa-heart"></i></div>
+        <div class="floating-heart"><i class="fas fa-heart"></i></div>
+        <div class="floating-heart"><i class="fas fa-heart"></i></div>
+        
+        <div class="hero-content">
+            <h1 data-aos="fade-up">Nuestros 4 Meses</h1>
+            <p data-aos="fade-up" data-aos-delay="500">Un viaje de amor, risas y momentos inolvidables</p>
+        </div>
+        
+        <div class="scroll-indicator" onclick="scrollToNext()">
+            <i class="fas fa-chevron-down fa-2x"></i>
+        </div>
+    </section>
+
+    <!-- Mes 1 -->
+    <section class="month-section" data-aos="fade-up">
+        <div class="heart-decoration"><i class="fas fa-heart"></i></div>
+        <div class="heart-decoration"><i class="fas fa-heart"></i></div>
+        <div class="month-content">
+            <div class="month-text">
+                <h2 data-aos="slide-right">Mes 1</h2>
+                <p data-aos="fade-up" data-aos-delay="200">
+                    El comienzo de nuestra hermosa historia. Esos primeros mensajes, esas primeras sonrisas,
+                    esa magia que sentimos desde el primer día. Todo era nuevo, emocionante y lleno de mariposas.
+                    Cada palabra tuya me hacía sonreír como nunca antes.
+                </p>
+            </div>
+            <div class="month-image" data-aos="slide-left">
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Primer mes">
+            </div>
+        </div>
+    </section>
+
+    <!-- Mes 2 -->
+    <section class="month-section" data-aos="fade-up">
+        <div class="heart-decoration"><i class="fas fa-heart"></i></div>
+        <div class="heart-decoration"><i class="fas fa-heart"></i></div>
+        <div class="month-content">
+            <div class="month-image" data-aos="slide-right">
+                <img src="https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Segundo mes">
+            </div>
+            <div class="month-text">
+                <h2 data-aos="slide-left">Mes 2</h2>
+                <p data-aos="fade-up" data-aos-delay="200">
+                    Aquí comenzamos a conocernos más profundamente. Compartimos sueños, miedos y esperanzas.
+                    Cada conversación era una nueva aventura, cada momento juntos se volvía más especial.
+                    Ya no había nervios, solo la alegría pura de descubrir quién eres realmente.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mes 3 -->
+    <section class="month-section" data-aos="fade-up">
+        <div class="heart-decoration"><i class="fas fa-heart"></i></div>
+        <div class="heart-decoration"><i class="fas fa-heart"></i></div>
+        <div class="month-content">
+            <div class="month-text">
+                <h2 data-aos="slide-right">Mes 3</h2>
+                <p data-aos="fade-up" data-aos-delay="200">
+                    La comodidad llegó a nuestra relación. Ya no había nervios, solo la alegría pura
+                    de estar juntos. Creamos tradiciones, bromas internas y momentos que atesoraremos siempre.
+                    Cada día contigo se sentía como en casa, cálido y perfecto.
+                </p>
+            </div>
+            <div class="month-image" data-aos="slide-left">
+                <img src="https://images.unsplash.com/photo-1518623001395-125242310d0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tercer mes">
+            </div>
+        </div>
+    </section>
+
+    <!-- Mes 4 -->
+    <section class="month-section" data-aos="fade-up">
+        <div class="heart-decoration"><i class="fas fa-heart"></i></div>
+        <div class="heart-decoration"><i class="fas fa-heart"></i></div>
+        <div class="month-content">
+            <div class="month-image" data-aos="slide-right">
+                <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cuarto mes">
+            </div>
+            <div class="month-text">
+                <h2 data-aos="slide-left">Mes 4</h2>
+                <p data-aos="fade-up" data-aos-delay="200">
+                    ¡Aquí estamos! Cuatro meses de risas, de apoyo mutuo, de crecimiento juntos.
+                    Cada día contigo es una nueva página en nuestra hermosa historia de amor.
+                    Gracias por llenar mi vida de color, risas y momentos inolvidables.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Section -->
+    <section class="final-section">
+        <div class="final-content" data-aos="fade-up">
+            <h2>Para muchos meses más...</h2>
+            <p>
+                Estos cuatro meses han sido solo el comienzo de nuestra increíble aventura.
+                Gracias por cada sonrisa, cada abrazo, cada momento compartido.
+                Te amo más cada día que pasa, y no puedo esperar a ver qué nos depara el futuro.
+            </p>
+            <button class="love-button" onclick="finalMessage()">
+                Con todo mi amor ❤️
+            </button>
+        </div>
+        
+        <!-- Particles -->
+        <div class="particle" style="left: 10%; width: 4px; height: 4px; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; width: 6px; height: 6px; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 30%; width: 3px; height: 3px; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 40%; width: 5px; height: 5px; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 50%; width: 4px; height: 4px; animation-delay: 8s;"></div>
+        <div class="particle" style="left: 60%; width: 6px; height: 6px; animation-delay: 10s;"></div>
+        <div class="particle" style="left: 70%; width: 3px; height: 3px; animation-delay: 12s;"></div>
+        <div class="particle" style="left: 80%; width: 5px; height: 5px; animation-delay: 14s;"></div>
+        <div class="particle" style="left: 90%; width: 4px; height: 4px; animation-delay: 16s;"></div>
+    </section>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message">
+        <h3>¡Felices 4 meses, mi amor!</h3>
+        <p>Que vengan muchos más llenos de alegría, aventuras y amor infinito 💕</p>
+        <button onclick="hideMessage()" style="margin-top: 1rem; background: rgba(255,255,255,0.3); border: 1px solid white; color: white; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer;">
+            ❤️ Te amo
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Smooth scrolling function
+        function scrollToNext() {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        // Final message with confetti
+        function finalMessage() {
+            const messageEl = document.getElementById('successMessage');
+            messageEl.classList.add('show');
+            createConfetti();
+            
+            // Auto hide after 8 seconds
+            setTimeout(() => {
+                hideMessage();
+            }, 8000);
+        }
+
+        function hideMessage() {
+            const messageEl = document.getElementById('successMessage');
+            messageEl.classList.remove('show');
+        }
+
+        // Confetti effect
+        function createConfetti() {
+            const colors = ['#ff6b9d', '#ff8e83', '#a8edea', '#fed6e3', '#fecfef'];
+            const confettiCount = 50;
+
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.zIndex = '9999';
+                confetti.style.borderRadius = '50%';
+                confetti.style.pointerEvents = 'none';
+                
+                document.body.appendChild(confetti);
+
+                const animation = confetti.animate([
+                    { transform: 'translateY(-10px) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight + 100}px) rotate(720deg)`, opacity: 0 }
+                ], {
+                    duration: 3000 + Math.random() * 2000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+
+        // Improved parallax for desktop only
+        function handleParallax() {
+            if (window.innerWidth > 1024) {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+            }
+        }
+
+        // Add parallax only on larger screens
+        if (window.innerWidth > 1024) {
+            window.addEventListener('scroll', handleParallax);
+        }
+
+        // Add sparkle effect on mouse move (desktop only)
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                if (Math.random() > 0.97) {
+                    createSparkle(e.clientX, e.clientY);
+                }
+            });
+        }
+
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '9998';
+            sparkle.style.fontSize = '12px';
+            
+            document.body.appendChild(sparkle);
+
+            const animation = sparkle.animate([
+                { opacity: 1, transform: 'scale(0) rotate(0deg)' },
+                { opacity: 0, transform: 'scale(1) rotate(180deg)' }
+            ], {
+                duration: 1000,
+                easing: 'ease-out'
+            });
+
+            animation.onfinish = () => sparkle.remove();
+        }
+
+        // Add some random floating hearts
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💕';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.bottom = '-50px';
+            heart.style.fontSize = '20px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '9997';
+            
+            document.body.appendChild(heart);
+
+            const animation = heart.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 0.8 },
+                { transform: 'translateY(-100vh) rotate(360deg)', opacity: 0 }
+            ], {
+                duration: 8000 + Math.random() * 4000,
+                easing: 'linear'
+            });
+
+            animation.onfinish = () => heart.remove();
+        }
+
+        // Create floating hearts periodically
+        setInterval(createFloatingHeart, 5000);
+    </script>
+</body>
+</html>
